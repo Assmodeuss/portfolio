@@ -1,0 +1,38 @@
+# Architecture as Horror
+
+Most horror games make the mistake of externalizing fear — the monster, the jump scare, the jump cut. *The Maze That Listens* takes the opposite position: the architecture IS the horror.
+
+There is no monster. There is no threat that can be defeated. There is only the maze, and the sound of your own movement reflected back at you in ways that shouldn't be possible.
+
+## Design Premise
+
+The maze is generated procedurally, but not randomly. A handcrafted ruleset governs which rooms connect to which, creating a topology where loops are impossible — you can only move forward or backward — but spatial memory is deliberately broken.
+
+Rooms look similar but aren't identical. Corridors that felt long feel short on return. The maze acoustically models your footstep sounds in real-time and introduces 80–120ms delays when you're near certain wall configurations, triggering the same neural pattern as hearing something follow you.
+
+> "The most effective horror is the horror of almost-recognition — the feeling that something is wrong before you can identify what."
+
+## Technical Architecture
+
+**Unity 2022 LTS** with custom spatial audio pipeline:
+
+- FMOD for audio event graph
+- Procedural mesh generation for corridor variation (subtle — not obvious)
+- Custom shader for light decay that slightly violates inverse-square law in certain zones
+- Binaural rendering via Steam Audio for headset spatialization
+
+The spatial audio was the hardest problem. Getting delay artifacts to feel biological rather than technical required three weeks of tuning. The final system uses: base delay from room acoustics simulation, plus a `HeartbeatFollower` component that tracks player heart rate via button-hold input and syncs delay timing to it.
+
+## Spatial Design Process
+
+I started from a single constraint: **no ambient music, no stingers, no jump scares.** Every acoustic event had to emerge from the player's own movement in the space.
+
+This meant designing the maze as an instrument. Different floor materials, ceiling heights, and wall angles produce distinct acoustic signatures. Players learn the space's sound before they learn its shape.
+
+Playtesting revealed something unexpected: the binaural audio was too effective in 20% of participants — producing genuine distress rather than engaged fear. The final build includes a "presence check" in the first 90 seconds that calibrates sensitivity.
+
+## What I Learned
+
+Spatial design is fundamentally about information withholding. The most powerful design decisions in this project were subtractive — what to remove, what to leave ambiguous, what to never explain.
+
+The maze doesn't have a narrative. It doesn't have an ending. Players can walk for as long as they want. That open-endedness was the most anxious decision — and the most defensible one.
