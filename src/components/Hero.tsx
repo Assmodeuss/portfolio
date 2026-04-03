@@ -1,52 +1,25 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { ArrowDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
-  const indicatorRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        indicatorRef.current?.classList.add("hidden-indicator");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <section
-      className="relative flex flex-col justify-end min-h-[100svh] pb-16"
-      style={{ paddingInline: "var(--margin-desktop)" }}
-      aria-label="Hero"
-    >
-      <div>
-        <h1
-          className="text-[clamp(3rem,8vw,7rem)] font-light tracking-[-0.03em] text-foreground"
-          style={{ lineHeight: 0.95, fontFamily: "var(--font-display)" }}
-        >
+    <section className="min-h-[819px] flex flex-col justify-center mb-32 relative items-center">
+      <div className="overflow-hidden mb-4 w-full flex justify-center">
+        <h1 className="text-[clamp(3.5rem,10vw,6rem)] font-headline font-bold tracking-tighter leading-[0.9] text-on-surface text-center">
           PRATYUSH
         </h1>
-        <p
-          className="font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground mt-4"
-        >
-          design · systems · craft
-        </p>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        ref={indicatorRef}
-        className="scroll-indicator absolute bottom-8 left-[var(--margin-desktop)] flex flex-col gap-2"
-        aria-hidden="true"
-      >
-        <span className="font-mono text-[0.625rem] uppercase tracking-[0.3em] text-ring">
+      <div className="flex items-center gap-4 mb-16 mx-auto">
+        <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-primary">
+          design · systems · craft
+        </span>
+      </div>
+
+      <div className="mt-12 flex flex-col items-center animate-pulse-soft mx-auto">
+        <span className="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-30 mb-2">
           Scroll
         </span>
-        <ArrowDown size={16} strokeWidth={1.5} className="text-ring" />
+        <ChevronDown size={16} strokeWidth={1.5} className="text-primary" />
       </div>
     </section>
   );

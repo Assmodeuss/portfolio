@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
 
 const ShaderGradientCanvas = dynamic(
   () => import("@shadergradient/react").then((m) => ({ default: m.ShaderGradientCanvas })),
@@ -14,14 +13,6 @@ const ShaderGradient = dynamic(
 );
 
 export default function ShaderBackground() {
-  const prefersReducedRef = useRef(false);
-
-  useEffect(() => {
-    prefersReducedRef.current = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-  }, []);
-
   return (
     <div className="fixed inset-0 -z-10" aria-hidden="true">
       <ShaderGradientCanvas

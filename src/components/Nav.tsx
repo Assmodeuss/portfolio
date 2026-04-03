@@ -1,79 +1,43 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
-interface NavProps {
-  onContactOpen: () => void;
-}
-
-export default function Nav({ onContactOpen }: NavProps) {
-  const [scrolled, setScrolled] = useState(false);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 100);
-        rafRef.current = null;
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  const linkClass =
-    "font-mono text-[0.8125rem] uppercase tracking-[0.06em] text-muted-foreground hover:text-foreground transition-colors duration-200";
-  const activeLinkClass =
-    "font-mono text-[0.8125rem] uppercase tracking-[0.06em] text-foreground";
-
+export default function Nav() {
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50"
-      style={{ height: "var(--nav-height)" }}
-    >
-      <nav
-        className={[
-          "flex items-center justify-between h-full transition-all duration-300",
-          scrolled
-            ? "nav-pill fixed"
-            : "px-[var(--margin-desktop)] max-w-none",
-        ].join(" ")}
-        style={
-          scrolled
-            ? undefined
-            : {
-                paddingInline: "var(--margin-desktop)",
-              }
-        }
-        aria-label="Main navigation"
-      >
-        <span className="font-mono text-[0.8125rem] uppercase tracking-[0.06em] text-muted-foreground">
-          pratyush
-        </span>
+    <nav className="fixed top-0 left-0 right-0 h-16 transition-all duration-500 ease-in-out bg-background/80 backdrop-blur-xl z-[100]">
+      <div className="flex justify-between items-center max-w-[720px] mx-auto px-6 w-full h-full">
+        <div className="font-mono font-bold text-on-surface tracking-widest text-sm">
+          PRATYUSH
+        </div>
 
-        <div className="flex items-center gap-8">
-          <a href="#work" className={activeLinkClass}>
-            Work
-          </a>
-          <a href="#about" className={linkClass}>
-            About
-          </a>
-          <a href="#studio" className={linkClass}>
-            Studio
-          </a>
-          <button
-            onClick={onContactOpen}
-            className={linkClass + " cursor-pointer"}
-          >
+        <div className="flex gap-6 items-center">
+          <div className="hidden md:flex gap-8">
+            <a
+              href="#"
+              className="text-primary font-bold font-label tracking-tighter uppercase text-xs"
+            >
+              Work
+            </a>
+            <a
+              href="#"
+              className="text-on-surface/60 hover:text-primary transition-colors duration-300 font-label tracking-tighter uppercase text-xs"
+            >
+              About
+            </a>
+            <a
+              href="#"
+              className="text-on-surface/60 hover:text-primary transition-colors duration-300 font-label tracking-tighter uppercase text-xs"
+            >
+              Studio
+            </a>
+            <a
+              href="#"
+              className="text-on-surface/60 hover:text-primary transition-colors duration-300 font-label tracking-tighter uppercase text-xs"
+            >
+              Lab
+            </a>
+          </div>
+          <button className="text-primary font-label tracking-tighter uppercase text-xs scale-95 transition-transform duration-200">
             Contact
           </button>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 }

@@ -1,243 +1,86 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens ─────────────────────────────────────────────────── */
-:root {
-  /* Colors */
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --secondary: #262626;
-  --muted-foreground: #a1a1a1;
-  --border: #262626;
-  --input: #262626;
-  --ring: #525252;
-  --primary: #fafafa;
-  --primary-foreground: #0a0a0a;
-  --accent-violet: #8d7dca;
-  --accent-violet-glow: rgba(141, 125, 202, 0.15);
-  --accent-violet-subtle: rgba(141, 125, 202, 0.08);
-  --grain-opacity: 0.04;
+/* ─── Original color palette ─────────────────────────────────────────── */
+@theme {
+  --color-background: #131313;
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353534;
+  --color-surface-bright: #3a3939;
+  --color-surface-variant: #353534;
+  --color-surface-tint: #ccbeff;
+  --color-on-surface: #e5e2e1;
+  --color-on-background: #e5e2e1;
+  --color-on-surface-variant: #cac4d2;
+  --color-inverse-surface: #e5e2e1;
+  --color-inverse-on-surface: #313030;
+  --color-primary: #ccbeff;
+  --color-primary-fixed: #e7deff;
+  --color-primary-fixed-dim: #ccbeff;
+  --color-primary-container: #9686d3;
+  --color-on-primary: #34236b;
+  --color-on-primary-container: #2d1b64;
+  --color-on-primary-fixed: #1e0856;
+  --color-on-primary-fixed-variant: #4a3b83;
+  --color-inverse-primary: #63539d;
+  --color-secondary: #c8c6c5;
+  --color-secondary-fixed: #e4e2e1;
+  --color-secondary-fixed-dim: #c8c6c5;
+  --color-secondary-container: #474746;
+  --color-on-secondary: #303030;
+  --color-on-secondary-container: #b7b5b4;
+  --color-on-secondary-fixed: #1b1c1c;
+  --color-on-secondary-fixed-variant: #474746;
+  --color-tertiary: #d6c95d;
+  --color-tertiary-container: #b9ad45;
+  --color-tertiary-fixed: #f3e576;
+  --color-tertiary-fixed-dim: #d6c95d;
+  --color-on-tertiary: #363100;
+  --color-on-tertiary-container: #464000;
+  --color-on-tertiary-fixed: #1f1c00;
+  --color-on-tertiary-fixed-variant: #4f4800;
+  --color-outline: #938f9b;
+  --color-outline-variant: #484550;
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
 
-  /* Typography — replace with self-hosted fonts via next/font/local in production */
-  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
-
-  /* Layout */
-  --content-max-width: 720px;
-  --margin-desktop: 6vw;
-  --margin-mobile: 5vw;
-  --nav-height: 64px;
-  --nav-height-compact: 48px;
-
-  /* Easing curves */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* ─── Font families ───────────────────────────────────────────────── */
+  --font-headline: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-/* ─── Tailwind theme mapping ─────────────────────────────────────────── */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-secondary: var(--secondary);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-ring: var(--ring);
-  --color-accent-violet: var(--accent-violet);
-  --font-mono: var(--font-mono);
-}
+/* ─── Scrollbar hide ──────────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ─── Base reset ─────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-/* ─── Focus management ───────────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* ─── Selection ──────────────────────────────────────────────────────── */
-::selection {
-  background: var(--accent-violet-subtle);
-  color: var(--foreground);
-}
-
-/* ─── Grain overlay ──────────────────────────────────────────────────── */
-.grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: var(--grain-opacity);
+/* ─── Grain overlay ───────────────────────────────────────────────────── */
+.grain-overlay {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
+  filter: contrast(150%) brightness(100%);
+  pointer-events: none;
+  opacity: 0.03;
   mix-blend-mode: overlay;
 }
 
-/* ─── Section reveal ─────────────────────────────────────────────────── */
-.section-reveal {
-  clip-path: inset(0 0 100% 0);
-  opacity: 0;
-  will-change: clip-path, opacity;
-}
-
-.section-reveal.visible {
-  clip-path: inset(0 0 0% 0);
+/* ─── Project hover reveal (CSS-only) ────────────────────────────────── */
+.project-reveal:hover .reveal-image {
   opacity: 1;
-  transition:
-    clip-path 800ms var(--ease-in-out),
-    opacity 600ms var(--ease-out);
+  transform: translate(-50%, -100%) scale(1);
 }
 
-.section-reveal.visible > * {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: stagger-in 300ms var(--ease-out) forwards;
+/* ─── Scroll indicator pulse ──────────────────────────────────────────── */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.2; transform: translateY(0); }
+  50%       { opacity: 1;   transform: translateY(4px); }
 }
-
-.section-reveal.visible > *:nth-child(1) { animation-delay: 100ms; }
-.section-reveal.visible > *:nth-child(2) { animation-delay: 150ms; }
-.section-reveal.visible > *:nth-child(3) { animation-delay: 200ms; }
-.section-reveal.visible > *:nth-child(4) { animation-delay: 250ms; }
-.section-reveal.visible > *:nth-child(n + 5) { animation-delay: 300ms; }
-
-@keyframes stagger-in {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ─── Scroll indicator ───────────────────────────────────────────────── */
-@keyframes pulse-indicator {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  50% { opacity: 0.8; transform: translateY(4px); }
-}
-
-.scroll-indicator {
-  animation: pulse-indicator 3s var(--ease-in-out) infinite;
-}
-
-.scroll-indicator.hidden-indicator {
-  opacity: 0;
-  transition: opacity 200ms var(--ease-in);
-}
-
-/* ─── Project hover image ────────────────────────────────────────────── */
-.project-image {
-  position: fixed;
-  pointer-events: none;
-  z-index: 50;
-  width: 280px;
-  height: 180px;
-  border-radius: 0.625rem;
-  overflow: hidden;
-  opacity: 0;
-  transform: scale(0.88) translate(-50%, -50%);
-  transition:
-    opacity 200ms var(--ease-in),
-    transform 200ms var(--ease-in);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--border);
-  will-change: transform, opacity;
-  top: 0;
-  left: 0;
-}
-
-.project-image.visible {
-  opacity: 1;
-  transform: scale(1) translate(-50%, -50%);
-  transition:
-    opacity 300ms var(--ease-out),
-    transform 300ms var(--ease-out);
-}
-
-/* ─── Nav scrolled state ─────────────────────────────────────────────── */
-.nav-pill {
-  background: rgba(38, 38, 38, 0.8);
-  backdrop-filter: blur(12px) saturate(1.2);
-  border: 1px solid var(--border);
-  border-radius: 0.625rem;
-  max-width: 480px;
-  height: var(--nav-height-compact);
-  margin: 12px auto;
-  left: 0;
-  right: 0;
-  padding-inline: 1.5rem;
-}
-
-/* ─── Contact drawer ─────────────────────────────────────────────────── */
-.contact-drawer {
-  transform: translateY(100%);
-  transition: transform 400ms var(--ease-drawer);
-}
-
-.contact-drawer.open {
-  transform: translateY(0);
-}
-
-.contact-overlay {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms var(--ease-out);
-}
-
-.contact-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ─── Reduced motion ─────────────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 200ms !important;
-  }
-
-  .section-reveal {
-    clip-path: none !important;
-    opacity: 0;
-    transition: opacity 200ms linear !important;
-  }
-
-  .section-reveal.visible {
-    opacity: 1;
-    transition: opacity 200ms linear !important;
-  }
-
-  .scroll-indicator {
-    animation: none;
-    opacity: 0.5;
-  }
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
 }
