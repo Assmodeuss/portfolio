@@ -1,0 +1,258 @@
+/* ============================================
+   ANIMATIONS — Pratyush Portfolio v1.0
+   All @keyframes and animation utility classes
+   ============================================ */
+
+/* --- Section Reveal (clip-path + stagger) --- */
+
+.section-reveal {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  will-change: clip-path, opacity;
+}
+
+.section-reveal.visible {
+  clip-path: inset(0 0 0% 0);
+  opacity: 1;
+  transition:
+    clip-path 800ms var(--ease-in-out),
+    opacity 600ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Child stagger — fires once via animation */
+.section-reveal.visible > * {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: stagger-in 300ms var(--ease-out) forwards;
+}
+
+.section-reveal.visible > *:nth-child(1) { animation-delay: 100ms; }
+.section-reveal.visible > *:nth-child(2) { animation-delay: 150ms; }
+.section-reveal.visible > *:nth-child(3) { animation-delay: 200ms; }
+.section-reveal.visible > *:nth-child(4) { animation-delay: 250ms; }
+.section-reveal.visible > *:nth-child(5) { animation-delay: 300ms; }
+.section-reveal.visible > *:nth-child(n+6) { animation-delay: 300ms; }
+
+@keyframes stagger-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Scroll Indicator pulse --- */
+
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.scroll-indicator {
+  animation: pulse-opacity 3s var(--ease-in-out) infinite;
+}
+
+.scroll-indicator.hidden {
+  opacity: 0;
+  transition: opacity 200ms var(--ease-in);
+  animation: none;
+}
+
+/* --- Animated Underline (left→right reveal) --- */
+
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--accent-violet);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out);
+}
+
+.animated-underline:hover::after,
+.animated-underline.active::after {
+  transform: scaleX(1);
+}
+
+/* --- Nav link underline (variant — uses foreground) --- */
+
+.nav-link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--foreground);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--ease-out);
+}
+
+.nav-link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* --- Project row hover background --- */
+
+.project-row-bg {
+  opacity: 0;
+  transform: scale(0.98);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.project-row:hover .project-row-bg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- Project row arrow icon --- */
+
+.project-arrow {
+  opacity: 0;
+  transform: translate(-8px, 8px);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.project-row:hover .project-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* --- Project hover image --- */
+
+.project-hover-image {
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+  pointer-events: none;
+}
+
+.project-hover-image.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- Contact drawer --- */
+
+.contact-drawer {
+  transform: translateY(100%);
+  transition: transform 400ms var(--ease-drawer);
+}
+
+.contact-drawer.open {
+  transform: translateY(0);
+}
+
+.contact-drawer.closing {
+  transform: translateY(100%);
+  transition: transform 250ms var(--ease-in);
+}
+
+.contact-overlay {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+  pointer-events: none;
+}
+
+.contact-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-overlay.closing {
+  opacity: 0;
+  transition: opacity 200ms var(--ease-in);
+}
+
+/* --- Hero content fade-up --- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle {
+  opacity: 0;
+  animation: fade-up 600ms var(--ease-out) forwards;
+  animation-play-state: paused;
+}
+
+.hero-subtitle.animate {
+  animation-play-state: running;
+}
+
+/* ============================================
+   REDUCED MOTION FALLBACKS
+   All transforms become simple opacity fades
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 200ms !important;
+  }
+
+  .section-reveal {
+    clip-path: none !important;
+    opacity: 0;
+    transition: opacity 200ms ease !important;
+  }
+
+  .section-reveal.visible {
+    opacity: 1;
+  }
+
+  .section-reveal.visible > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scroll-indicator {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .hero-subtitle {
+    animation: none;
+    opacity: 1;
+  }
+
+  .project-hover-image {
+    transition: opacity 200ms ease !important;
+    transform: none !important;
+  }
+
+  .contact-drawer {
+    transition: transform 200ms ease !important;
+  }
+}
