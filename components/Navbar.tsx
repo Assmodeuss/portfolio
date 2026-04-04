@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import MouseFollowingEyes from "@/components/ui/mouse-following-eyes"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -27,10 +28,27 @@ export default function Navbar() {
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
-      <div className={`flex justify-between items-center w-full ${scrolled ? "px-6 py-3" : "px-[5.5rem] pt-6 pb-3"}`}>
-        {/* 19.4:1 ✓ */}
-        <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
-        <div className="flex gap-6 items-center">
+
+      <div className={`relative flex items-center w-full ${scrolled ? "px-6 py-3" : "justify-between px-[5.5rem] pt-6 pb-3"}`}>
+
+        {/* Logo */}
+        <div className={`font-mono font-bold text-foreground tracking-widest text-sm ${scrolled ? "flex-1" : ""}`}>
+          PRATYUSH
+        </div>
+
+        {/* Eyes — in flex flow when scrolled (even 3-col), absolute center when full-width */}
+        {scrolled ? (
+          <div className="flex-1 flex justify-center">
+            <MouseFollowingEyes scrolled={scrolled} />
+          </div>
+        ) : (
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <MouseFollowingEyes scrolled={scrolled} />
+          </div>
+        )}
+
+        {/* Nav links */}
+        <div className={`flex gap-6 items-center ${scrolled ? "flex-1 justify-end" : ""}`}>
           <div className="hidden md:flex gap-8">
             {/* Active link — accent-violet 5.2:1 ✓ */}
             <a data-cursor="active" className="text-[#8d7dca] font-bold font-label tracking-tighter uppercase text-xs" href="#">Work</a>
@@ -41,6 +59,7 @@ export default function Navbar() {
           </div>
           <button data-cursor="active" className="text-[#8d7dca] font-label tracking-tighter uppercase text-xs scale-95 transition-transform duration-200">Contact</button>
         </div>
+
       </div>
     </nav>
   )
