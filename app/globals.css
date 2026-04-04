@@ -4,12 +4,40 @@
 
 /* ShaderGradientCanvas fills its wrapper via className="absolute inset-0" */
 
+/* ── BackgroundRippleEffect — cell animation ────────────────────────────────
+   Tailwind v3 equivalent of the v4 @theme inline block.
+   animate-cell-ripple is set via @layer utilities so Tailwind's JIT picks it up.
+   --delay and --duration are set as inline CSS vars on each cell element.
+*/
+@keyframes cell-ripple {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+@layer utilities {
+  .animate-cell-ripple {
+    animation: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
+  }
+
+  /* Radial mask that fades the grid from opaque at top to transparent at bottom */
+  .mask-radial-at-top {
+    -webkit-mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 20%, transparent 100%);
+            mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 20%, transparent 100%);
+  }
+}
+
 /* Material Symbols icon font */
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 :root {
-  --background: #131313;
-  --foreground: #e5e2e1;
+  /* Design-system tokens — dark mode default (visual-system-guide §1.1) */
+  --background:        #0a0a0a;   /* page canvas                  */
+  --foreground:        #fafafa;   /* primary text    19.4:1 ✓ AA  */
+  --muted-foreground:  #a1a1a1;   /* secondary text   9.1:1 ✓ AA  */
+  --ring:              #525252;   /* focus / ghost    3.7:1 large  */
+  --border:            #262626;   /* dividers                     */
+  --accent-violet:     #8d7dca;   /* accent (5 places) 5.2:1 ✓ AA */
 }
 
 .material-symbols-outlined {

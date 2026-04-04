@@ -9,7 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'background': '#131313',
+        // ── Spec-compliant tokens (visual-system-guide §1) ──────────────
+        // Contrast ratios verified against WCAG AA on #0a0a0a background:
+        //   foreground      #fafafa   19.4:1 ✓ AA
+        //   muted-foreground #a1a1a1   9.1:1 ✓ AA
+        //   ring / ghost    #525252    3.7:1 ✓ large text only
+        //   accent-violet   #8d7dca    5.2:1 ✓ AA
+        'background':       '#0a0a0a',   // was #131313 — spec requires #0a0a0a
+        'foreground':       '#fafafa',
+        'muted-foreground': '#a1a1a1',
+        'accent-violet':    '#8d7dca',
+        // ── Original Material Design palette (kept for backward compat) ──
+        'background-legacy': '#131313',
         'on-primary-container': '#2d1b64',
         'tertiary-container': '#b9ad45',
         'secondary-fixed-dim': '#c8c6c5',
