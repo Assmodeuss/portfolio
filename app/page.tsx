@@ -1,5 +1,6 @@
 import BackgroundSystem from '@/components/BackgroundSystem'
 import { BackgroundRippleEffect } from '@/components/ui/background-ripple-effect'
+import { MagneticText } from '@/components/ui/morphing-cursor'
 
 // ── Colour contrast audit (visual-system-guide §8 / WCAG AA) ──────────────
 // All text tokens verified against bg #0a0a0a:
@@ -77,7 +78,7 @@ export default function Home() {
           <div className="overflow-hidden mb-4 w-full flex justify-center">
             {/* 19.4:1 ✓ */}
             <h1 className="text-[clamp(3.5rem,10vw,6rem)] font-headline font-bold tracking-tighter leading-[0.9] text-foreground text-center">
-              PRATYUSH
+              <MagneticText text="PRATYUSH" hoverText="EXPLORE" />
             </h1>
           </div>
           <div className="flex items-center gap-4 mb-16 mx-auto">
