@@ -112,9 +112,11 @@
 .animate-pulse-soft {
     animation: pulse-soft 3s ease-in-out infinite
     }</style>
-</head>
-<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary no-scrollbar antialiased">
-<div class="fixed inset-0 grain-overlay z-[999]"></div>
+<script src="https://unpkg.com/@shadergradient/react@1.1.2/dist/index.js" type="module"></script></head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary no-scrollbar antialiased"><div class="fixed inset-0 -z-10">
+<shader-gradient animate="on" axeshelper="off" bgcolor1="#000000" bgcolor2="#000000" brightness="1.8" camerazoom="9.1" cazimuthangle="180" cdistance="2.59" color1="#606080" color2="#8d7dca" color3="#212121" cpolarangle="80" destination="onCanvas" embedmode="off" envpreset="city" format="gif" fov="45" framerate="10" gizmohelper="hide" grain="on" lighttype="3d" pixeldensity="1" positionx="0" positiony="0" positionz="0" range="disabled" rangeend="40" rangestart="0" reflection="0" rotationx="50" rotationy="0" rotationz="-60" shader="defaults" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" type="waterPlane" uamplitude="0" udensity="1.5" ufrequency="0" uspeed="0.3" ustrength="1.5" utime="8" wireframe="false" zoomout="false">
+</shader-gradient>
+</div>
 <nav class="fixed top-0 left-0 right-0 h-16 transition-all duration-500 ease-in-out bg-[#131313]/80 backdrop-blur-xl z-[100]">
 <div class="flex justify-between items-center max-w-[720px] mx-auto px-6 w-full h-full">
 <div class="font-['JetBrains_Mono'] font-bold text-[#e5e2e1] tracking-widest text-sm">PRATYUSH</div>
@@ -155,20 +157,16 @@
 <button class="mt-auto py-4 border border-outline-variant text-[#ccbeff] font-mono text-[10px] tracking-widest uppercase hover:bg-surface-container-high transition-colors">Copy Email</button>
 </aside>
 <main class="max-w-[720px] mx-auto px-6 pt-32 pb-24">
-<section class="min-h-[819px] flex flex-col justify-center items-start mb-32 relative">
-<div class="absolute -z-10 inset-0 opacity-20 pointer-events-none overflow-hidden blur-[120px]">
-<div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/30 rounded-full animate-pulse"></div>
-<div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-tertiary-container/20 rounded-full"></div>
-</div>
-<div class="overflow-hidden mb-4">
-<h1 class="text-[clamp(3.5rem,10vw,6rem)] font-headline font-bold tracking-tighter leading-[0.9] text-on-surface">
+<section class="min-h-[819px] flex flex-col justify-center mb-32 relative items-center">
+<div class="overflow-hidden mb-4 w-full flex justify-center">
+<h1 class="text-[clamp(3.5rem,10vw,6rem)] font-headline font-bold tracking-tighter leading-[0.9] text-on-surface text-center">
           PRATYUSH
         </h1>
 </div>
-<div class="flex items-center gap-4 mb-16">
+<div class="flex items-center gap-4 mb-16 mx-auto">
 <span class="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-primary">design · systems · craft</span>
 </div>
-<div class="mt-12 flex flex-col items-center animate-pulse-soft">
+<div class="mt-12 flex flex-col items-center animate-pulse-soft mx-auto">
 <span class="font-mono text-[0.6rem] tracking-[0.3em] uppercase opacity-30 mb-2">Scroll</span>
 <span class="material-symbols-outlined text-primary text-sm">expand_more</span>
 </div>
