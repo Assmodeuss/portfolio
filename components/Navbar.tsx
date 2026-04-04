@@ -34,7 +34,7 @@ export default function Navbar() {
 
         {/* Eyes — centered absolutely so they don't affect flex layout */}
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center z-10">
-          <MouseFollowingEyes />
+          <MouseFollowingEyes scrolled={scrolled} />
         </div>
         <div className="flex gap-6 items-center">
           <div className="hidden md:flex gap-8">
