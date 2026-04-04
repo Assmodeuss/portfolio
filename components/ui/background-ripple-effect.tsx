@@ -68,7 +68,7 @@ export const BackgroundRippleEffect = ({
         />
         <DivGrid
           key={`base-${rippleKey}`}
-          className="mask-radial-at-top opacity-20"
+          className="mask-radial-at-top"
           rows={rows}
           cols={cols}
           cellSize={cellSize}
