@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
 // CSS custom properties set inline on cells (animation timing only)
@@ -31,13 +31,26 @@ interface DivGridProps {
 }
 
 export const BackgroundRippleEffect = ({
-  rows = 8,
-  cols = 27,
   cellSize = 56,
 }: BackgroundRippleEffectProps) => {
   const [clickedCell, setClickedCell] = useState<ClickedCell | null>(null)
   const [rippleKey, setRippleKey] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
+
+  const [rows, setRows] = useState(0)
+  const [cols, setCols] = useState(0)
+
+  useEffect(() => {
+    const update = () => {
+      setRows(Math.ceil(window.innerHeight / cellSize))
+      setCols(Math.ceil(window.innerWidth / cellSize))
+    }
+    update()
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [cellSize])
+
+  if (rows === 0 || cols === 0) return null
 
   return (
     <div
@@ -45,7 +58,7 @@ export const BackgroundRippleEffect = ({
       className={cn(
         "absolute inset-0 h-full w-full",
         // Design-system tokens (dark-mode only — this site has no light mode)
-        "[--cell-border-color:#262626] [--cell-fill-color:#0d0d0d] [--cell-shadow-color:#1a1a1a]"
+        "[--cell-border-color:rgba(255,255,255,0.10)] [--cell-fill-color:rgba(255,255,255,0.05)]"
       )}
     >
       {/* overflow-hidden clips the fixed-size grid at viewport edges */}
@@ -55,7 +68,7 @@ export const BackgroundRippleEffect = ({
         />
         <DivGrid
           key={`base-${rippleKey}`}
-          className="mask-radial-at-top opacity-60"
+          className="mask-radial-at-top"
           rows={rows}
           cols={cols}
           cellSize={cellSize}
@@ -95,7 +108,6 @@ const DivGrid = ({
     gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
     width: cols * cellSize,
     height: rows * cellSize,
-    marginInline: "auto",
   }
 
   return (
@@ -117,8 +129,8 @@ const DivGrid = ({
           <div
             key={idx}
             className={cn(
-              "cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform",
-              "hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]",
+              "cell relative border-[0.5px] opacity-20 transition-opacity duration-300 ease-out will-change-transform",
+              "hover:opacity-40",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
               !interactive && "pointer-events-none"
             )}
