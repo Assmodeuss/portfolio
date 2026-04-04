@@ -58,7 +58,7 @@ export const BackgroundRippleEffect = ({
       className={cn(
         "absolute inset-0 h-full w-full",
         // Design-system tokens (dark-mode only — this site has no light mode)
-        "[--cell-border-color:rgba(255,255,255,0.08)] [--cell-fill-color:rgba(255,255,255,0.03)] [--cell-shadow-color:#1a1a1a]"
+        "[--cell-border-color:rgba(255,255,255,0.10)] [--cell-fill-color:rgba(255,255,255,0.05)]"
       )}
     >
       {/* overflow-hidden clips the fixed-size grid at viewport edges */}
@@ -129,8 +129,8 @@ const DivGrid = ({
           <div
             key={idx}
             className={cn(
-              "cell relative border-[0.5px] opacity-20 transition-opacity duration-150 will-change-transform",
-              "hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]",
+              "cell relative border-[0.5px] opacity-20 transition-opacity duration-300 ease-out will-change-transform",
+              "hover:opacity-40",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
               !interactive && "pointer-events-none"
             )}
