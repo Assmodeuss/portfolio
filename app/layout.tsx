@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { Cursor } from '@/components/ui/inverted-cursor'
 
 export const metadata: Metadata = {
   title: 'Pratyush — Design · Systems · Craft',
@@ -24,6 +25,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary no-scrollbar antialiased">
+        <Cursor />
         {children}
       </body>
     </html>
