@@ -1,4 +1,5 @@
 import BackgroundSystem from '@/components/BackgroundSystem'
+import BackgroundRipple from '@/components/BackgroundRipple'
 
 // ── Colour contrast audit (visual-system-guide §8 / WCAG AA) ──────────────
 // All text tokens verified against bg #0a0a0a:
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <>
       <BackgroundSystem />
+      <BackgroundRipple />
 
       {/* Desktop nav */}
       <nav className="fixed top-0 left-0 right-0 h-16 transition-all duration-500 ease-in-out bg-background/80 backdrop-blur-xl z-[100]">
@@ -65,7 +67,7 @@ export default function Home() {
         <button className="mt-auto py-4 border border-[#262626] text-[#8d7dca] font-mono text-[10px] tracking-widest uppercase hover:bg-[#1a1a1a] transition-colors">Copy Email</button>
       </aside>
 
-      <main className="max-w-[720px] mx-auto px-6 pt-32 pb-24">
+      <main className="relative z-10 max-w-[720px] mx-auto px-6 pt-32 pb-24">
         {/* Hero */}
         <section className="min-h-[819px] flex flex-col justify-center mb-32 relative items-center">
           <div className="overflow-hidden mb-4 w-full flex justify-center">
