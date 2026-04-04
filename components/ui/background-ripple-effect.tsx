@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
 // CSS custom properties set inline on cells (animation timing only)
@@ -31,13 +31,26 @@ interface DivGridProps {
 }
 
 export const BackgroundRippleEffect = ({
-  rows = 8,
-  cols = 27,
   cellSize = 56,
 }: BackgroundRippleEffectProps) => {
   const [clickedCell, setClickedCell] = useState<ClickedCell | null>(null)
   const [rippleKey, setRippleKey] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
+
+  const [rows, setRows] = useState(0)
+  const [cols, setCols] = useState(0)
+
+  useEffect(() => {
+    const update = () => {
+      setRows(Math.ceil(window.innerHeight / cellSize))
+      setCols(Math.ceil(window.innerWidth / cellSize))
+    }
+    update()
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [cellSize])
+
+  if (rows === 0 || cols === 0) return null
 
   return (
     <div
@@ -95,7 +108,6 @@ const DivGrid = ({
     gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
     width: cols * cellSize,
     height: rows * cellSize,
-    marginInline: "auto",
   }
 
   return (
