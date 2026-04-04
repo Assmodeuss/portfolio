@@ -75,9 +75,10 @@ export function Cursor() {
       style={{
         width: hovered ? 60 : 20,
         height: hovered ? 60 : 20,
+        borderRadius: "50%",
         transition: "width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
-      className="fixed top-0 left-0 pointer-events-none z-[999] rounded-full mix-blend-difference bg-white"
+      className="fixed top-0 left-0 pointer-events-none z-[999] mix-blend-difference bg-white"
     />
   );
 }
