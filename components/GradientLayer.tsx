@@ -17,7 +17,7 @@ export default function GradientLayer() {
         animate="on"
         uTime={8}
         uSpeed={0.3}
-        uStrength={0.6}
+        uStrength={0.8}
         uDensity={1.5}
         uFrequency={0}
         uAmplitude={0}
