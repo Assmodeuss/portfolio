@@ -92,11 +92,11 @@ const Eye: React.FC<EyeProps> = ({ mouseX, mouseY, selfRef, otherRef }) => {
   return (
     <div
       ref={selfRef}
-      className="relative bg-white border-2 border-white/20 box-border rounded-full w-[2.5rem] aspect-square flex-shrink-0 flex items-center justify-center overflow-hidden"
+      className="relative bg-white border-2 border-white/20 rounded-full h-10 w-10 flex-shrink-0 flex items-center justify-center overflow-hidden"
     >
       <div
         ref={pupilRef}
-        className="absolute bg-black rounded-full w-3 aspect-square transition-all duration-75"
+        className="absolute bg-black rounded-full h-3 w-3 transition-all duration-75"
       >
         <div className="w-1 h-1 bg-white rounded-full absolute bottom-0.5 right-0.5" />
       </div>
