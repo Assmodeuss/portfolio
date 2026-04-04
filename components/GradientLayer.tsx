@@ -37,7 +37,7 @@ export default function GradientLayer() {
         wireframe={false}
         shader="defaults"
         lightType="3d"
-        brightness={1.1}
+        brightness={0.6}
         envPreset="city"
         grain="on"
         zoomOut={false}
