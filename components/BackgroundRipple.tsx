@@ -4,14 +4,19 @@ import { useEffect, useRef } from 'react'
 
 // Ripple interaction layer
 // ─────────────────────────────────────────────────────────────────────────────
-// z-stack position: above gradient/overlay (-z-10), below content (z-10)
+// z-stack: above BackgroundSystem (-z-10), below content (z-10)
 // pointer-events: none — never blocks clicks or hover states
 // No React state used — ripple elements are created/removed via DOM directly
+//
+// FIX (was broken):
+//   Old bug: gradient rgba(...,0.07) × animation opacity 0.09 = ~0.006 effective
+//   opacity → completely invisible. blur(24px) made it worse.
+//   Fix: gradient color at full saturation, element opacity alone controls fade.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const RIPPLE_SIZE = 560          // px diameter
 const RIPPLE_DURATION = 900      // ms
-const MOUSEMOVE_THROTTLE = 160   // ms between mousemove ripples
+const MOUSEMOVE_THROTTLE = 32    // ms between mousemove ripples (was 160 — too slow)
 
 export default function BackgroundRipple() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -32,8 +37,8 @@ export default function BackgroundRipple() {
         width: ${RIPPLE_SIZE}px;
         height: ${RIPPLE_SIZE}px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(141, 125, 202, 0.07) 0%, transparent 68%);
-        filter: blur(24px);
+        background: radial-gradient(circle, rgba(141, 125, 202, 0.4) 0%, transparent 70%);
+        filter: blur(12px);
         animation: bg-ripple ${RIPPLE_DURATION}ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
         pointer-events: none;
         will-change: transform, opacity;
@@ -66,9 +71,8 @@ export default function BackgroundRipple() {
     <>
       <style>{`
         @keyframes bg-ripple {
-          0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 0.09; }
-          60%  { opacity: 0.06; }
-          100% { transform: translate(-50%, -50%) scale(1);   opacity: 0;    }
+          0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 0.3; }
+          100% { transform: translate(-50%, -50%) scale(1);   opacity: 0;   }
         }
       `}</style>
       <div
