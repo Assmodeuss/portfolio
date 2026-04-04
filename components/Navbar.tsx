@@ -27,7 +27,7 @@ export default function Navbar() {
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
-      <div className="flex justify-between items-center w-full px-6 py-3">
+      <div className={`flex justify-between items-center w-full ${scrolled ? "px-6 py-3" : "px-22 pt-6 pb-3"}`}>
         {/* 19.4:1 ✓ */}
         <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
         <div className="flex gap-6 items-center">
