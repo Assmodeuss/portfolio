@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import MouseFollowingEyes from "@/components/ui/mouse-following-eyes"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -28,11 +27,6 @@ export default function Navbar() {
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
-
-      {/* Eyes — absolute to <nav>, fully independent of flex layout */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-        <MouseFollowingEyes scrolled={scrolled} />
-      </div>
 
       <div className={`relative flex justify-between items-center w-full ${scrolled ? "px-6 py-3" : "px-[5.5rem] pt-6 pb-3"}`}>
         <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
