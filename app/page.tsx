@@ -1,9 +1,9 @@
-import ShaderBackground from '@/components/ShaderBackground'
+import BackgroundSystem from '@/components/BackgroundSystem'
 
 export default function Home() {
   return (
     <>
-      <ShaderBackground />
+      <BackgroundSystem />
 
       {/* Desktop nav */}
       <nav className="fixed top-0 left-0 right-0 h-16 transition-all duration-500 ease-in-out bg-[#131313]/80 backdrop-blur-xl z-[100]">
