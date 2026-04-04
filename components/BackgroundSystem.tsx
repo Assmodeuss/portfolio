@@ -21,9 +21,10 @@ const GradientLayer = dynamic(() => import('./GradientLayer'), { ssr: false })
 
 const CELL  = 72          // px — box size, close to Aceternity's 64px default
 const LERP  = 0.08        // within spec 0.05–0.12
-const RAD   = 220         // cursor influence radius (px)
+const RAD   = 220         // hover influence radius (px)
+const CLICK_RAD = 360     // click burst radius — wider than hover
 // Active cell: accent-violet fill at this max alpha
-const MAX_FILL_ALPHA   = 0.10
+const MAX_FILL_ALPHA   = 0.15
 // Resting grid lines: drawn once, always visible
 const GRID_LINE_ALPHA  = 0.04
 
@@ -109,12 +110,27 @@ function BackgroundBoxes() {
       mouseRef.current = { x: e.clientX, y: e.clientY }
     }
 
-    const onResize = () => {
-      build()
-      // No need to drawGrid separately — the loop redraws every frame
+    // Click burst — immediate energy spike on all tiles within CLICK_RAD.
+    // The lerp loop naturally decays them back; no extra animation needed.
+    const onClick = (e: MouseEvent) => {
+      const { clientX: cx, clientY: cy } = e
+      const cells = cellsRef.current
+      for (let i = 0; i < cells.length; i++) {
+        const c   = cells[i]
+        const dx  = c.cx - cx
+        const dy  = c.cy - cy
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        if (dist < CLICK_RAD) {
+          const burst = 1 - dist / CLICK_RAD
+          if (burst > c.energy) c.energy = burst
+        }
+      }
     }
 
+    const onResize = () => { build() }
+
     window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('click',     onClick)
     window.addEventListener('resize',    onResize)
 
     const loop = () => {
@@ -161,6 +177,7 @@ function BackgroundBoxes() {
     return () => {
       cancelAnimationFrame(rafRef.current)
       window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('click',     onClick)
       window.removeEventListener('resize',    onResize)
     }
   }, [])
