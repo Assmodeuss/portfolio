@@ -17,7 +17,7 @@ export default function GradientLayer() {
         animate="on"
         uTime={8}
         uSpeed={0.3}
-        uStrength={0.8}
+        uStrength={0.6}
         uDensity={1.5}
         uFrequency={0}
         uAmplitude={0}
@@ -37,7 +37,7 @@ export default function GradientLayer() {
         wireframe={false}
         shader="defaults"
         lightType="3d"
-        brightness={1.0}
+        brightness={1.1}
         envPreset="city"
         grain="on"
         zoomOut={false}
