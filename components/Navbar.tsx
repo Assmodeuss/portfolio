@@ -15,13 +15,19 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed z-[100] transition-all duration-300 ease-in-out ${
+      className={`fixed z-[100] transition-all duration-300 ease left-1/2 -translate-x-1/2 ${
         scrolled
-          ? "top-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[720px] rounded-full backdrop-blur-md bg-black/20 border border-white/10"
-          : "top-0 left-0 right-0 h-16 bg-transparent"
+          ? "top-6 w-[720px] rounded-full backdrop-blur-md bg-black/20"
+          : "top-0 w-full bg-transparent"
       }`}
     >
-      <div className="flex justify-between items-center max-w-[720px] mx-auto px-6 w-full h-full py-3">
+      {/* Border overlay — fades in separately to prevent stroke flash during transition */}
+      <div
+        className={`absolute inset-0 rounded-full border border-white/10 pointer-events-none transition-opacity duration-300 ${
+          scrolled ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <div className="flex justify-between items-center w-full px-6 py-3">
         {/* 19.4:1 ✓ */}
         <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
         <div className="flex gap-6 items-center">
