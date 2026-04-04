@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export function Cursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     // Only show on non-touch / pointer-fine devices
@@ -32,12 +33,36 @@ export function Cursor() {
       raf = requestAnimationFrame(loop);
     };
 
+    const onEnter = () => setHovered(true);
+    const onLeave = () => setHovered(false);
+
+    const bindTargets = () => {
+      document
+        .querySelectorAll<HTMLElement>('[data-cursor="active"]')
+        .forEach((el) => {
+          el.addEventListener("mouseenter", onEnter);
+          el.addEventListener("mouseleave", onLeave);
+        });
+    };
+
+    // Bind immediately and re-bind whenever the DOM changes
+    bindTargets();
+    const observer = new MutationObserver(bindTargets);
+    observer.observe(document.body, { childList: true, subtree: true });
+
     window.addEventListener("mousemove", onMove);
     raf = requestAnimationFrame(loop);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
+      observer.disconnect();
+      document
+        .querySelectorAll<HTMLElement>('[data-cursor="active"]')
+        .forEach((el) => {
+          el.removeEventListener("mouseenter", onEnter);
+          el.removeEventListener("mouseleave", onLeave);
+        });
     };
   }, []);
 
@@ -46,8 +71,14 @@ export function Cursor() {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-[999] w-6 h-6 rounded-full mix-blend-difference bg-white"
       aria-hidden="true"
+      style={{
+        width: hovered ? 60 : 20,
+        height: hovered ? 60 : 20,
+        borderRadius: "50%",
+        transition: "width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
+      className="fixed top-0 left-0 pointer-events-none z-[999] mix-blend-difference bg-white"
     />
   );
 }
