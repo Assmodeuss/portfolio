@@ -68,18 +68,15 @@ export function Cursor() {
 
   if (!visible) return null;
 
-  const size = hovered ? 120 : 60;
-
   return (
     <div
       ref={cursorRef}
       aria-hidden="true"
       style={{
-        width: size,
-        height: size,
-        opacity: hovered ? 0.7 : 1,
-        transition: "width 0.25s ease, height 0.25s ease, opacity 0.25s ease",
-        border: hovered ? "2px solid white" : "none",
+        width: 20,
+        height: 20,
+        border: hovered ? "2px solid white" : "2px solid transparent",
+        transition: "border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
       className="fixed top-0 left-0 pointer-events-none z-[999] rounded-full mix-blend-difference bg-white"
     />
