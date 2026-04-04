@@ -48,6 +48,19 @@ export const BackgroundRippleEffect = ({
     return () => window.removeEventListener("resize", update)
   }, [cellSize])
 
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (!ref.current) return
+      const rect = ref.current.getBoundingClientRect()
+      const col = Math.floor((e.clientX - rect.left) / cellSize)
+      const row = Math.floor((e.clientY - rect.top) / cellSize)
+      setClickedCell({ row, col })
+      setRippleKey((k) => k + 1)
+    }
+    window.addEventListener("click", handler)
+    return () => window.removeEventListener("click", handler)
+  }, [cellSize])
+
   if (rows === 0 || cols === 0) return null
 
   return (
@@ -58,16 +71,6 @@ export const BackgroundRippleEffect = ({
         // Design-system tokens (dark-mode only — this site has no light mode)
         "[--cell-border-color:rgba(255,255,255,0.10)] [--cell-fill-color:rgba(255,255,255,0.05)]"
       )}
-      onClick={(e) => {
-        if (!ref.current) return
-        const rect = ref.current.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
-        const col = Math.floor(x / cellSize)
-        const row = Math.floor(y / cellSize)
-        setClickedCell({ row, col })
-        setRippleKey((k) => k + 1)
-      }}
     >
       {/* overflow-hidden clips the fixed-size grid at viewport edges */}
       <div className="absolute inset-0 overflow-hidden">
