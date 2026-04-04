@@ -1,5 +1,6 @@
 import BackgroundSystem from '@/components/BackgroundSystem'
 import { BackgroundRippleEffect } from '@/components/ui/background-ripple-effect'
+import Navbar from '@/components/Navbar'
 
 // ── Colour contrast audit (visual-system-guide §8 / WCAG AA) ──────────────
 // All text tokens verified against bg #0a0a0a:
@@ -24,23 +25,7 @@ export default function Home() {
       </div>
 
       {/* Desktop nav */}
-      <nav className="fixed top-0 left-0 right-0 h-16 transition-all duration-500 ease-in-out bg-background/80 backdrop-blur-xl z-[100]">
-        <div className="flex justify-between items-center max-w-[720px] mx-auto px-6 w-full h-full">
-          {/* 19.4:1 ✓ */}
-          <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
-          <div className="flex gap-6 items-center">
-            <div className="hidden md:flex gap-8">
-              {/* Active link — accent-violet 5.2:1 ✓ */}
-              <a data-cursor="active" className="text-[#8d7dca] font-bold font-label tracking-tighter uppercase text-xs" href="#">Work</a>
-              {/* Inactive links — muted-foreground 9.1:1 ✓ */}
-              <a data-cursor="active" className="text-muted-foreground hover:text-[#8d7dca] transition-colors duration-300 font-label tracking-tighter uppercase text-xs" href="#">About</a>
-              <a data-cursor="active" className="text-muted-foreground hover:text-[#8d7dca] transition-colors duration-300 font-label tracking-tighter uppercase text-xs" href="#">Studio</a>
-              <a data-cursor="active" className="text-muted-foreground hover:text-[#8d7dca] transition-colors duration-300 font-label tracking-tighter uppercase text-xs" href="#">Lab</a>
-            </div>
-            <button data-cursor="active" className="text-[#8d7dca] font-label tracking-tighter uppercase text-xs scale-95 transition-transform duration-200">Contact</button>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Sidebar */}
       <aside className="fixed right-0 top-0 h-full z-[200] flex flex-col p-8 bg-[#0e0e0e] w-[320px] shadow-[0_20px_40px_rgba(0,0,0,0.4)] translate-x-full lg:translate-x-0 hidden">
