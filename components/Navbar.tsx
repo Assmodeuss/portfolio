@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
 
         {/* Eyes — centered absolutely so they don't affect flex layout */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center z-10">
+        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex items-center z-10">
           <MouseFollowingEyes scrolled={scrolled} />
         </div>
         <div className="flex gap-6 items-center">

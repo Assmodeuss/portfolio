@@ -78,17 +78,17 @@ export default function MouseFollowingEyes({ scrolled = false }: MouseFollowingE
       {/* Left Eye */}
       <div
         ref={leftEyeRef}
-        className="h-[2.5rem] w-[2.5rem] rounded-full bg-white border-2 border-white/20 flex items-center justify-center overflow-hidden"
+        className="h-7 w-10 rounded-full bg-white border-2 border-white/20 flex items-center justify-center overflow-hidden"
       >
-        <div ref={leftPupilRef} className="h-4 w-4 rounded-full bg-black" />
+        <div ref={leftPupilRef} className="h-3 w-3 rounded-full bg-black" />
       </div>
 
       {/* Right Eye */}
       <div
         ref={rightEyeRef}
-        className="h-[2.5rem] w-[2.5rem] rounded-full bg-white border-2 border-white/20 flex items-center justify-center overflow-hidden"
+        className="h-7 w-10 rounded-full bg-white border-2 border-white/20 flex items-center justify-center overflow-hidden"
       >
-        <div ref={rightPupilRef} className="h-4 w-4 rounded-full bg-black" />
+        <div ref={rightPupilRef} className="h-3 w-3 rounded-full bg-black" />
       </div>
     </div>
   )
