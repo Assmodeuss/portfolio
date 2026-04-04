@@ -28,15 +28,15 @@ export default function Navbar() {
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
-      <div className={`relative flex items-center w-full ${scrolled ? "justify-center gap-8 px-6 py-3" : "justify-between px-[5.5rem] pt-6 pb-3"}`}>
-        {/* 19.4:1 ✓ */}
-        <div className="font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
+      <div className={`relative flex justify-between items-center w-full ${scrolled ? "px-6 py-3" : "px-[5.5rem] pt-6 pb-3"}`}>
+        {/* 19.4:1 ✓ — flex-1 ensures equal width on both sides so eyes are truly centered */}
+        <div className="flex-1 font-mono font-bold text-foreground tracking-widest text-sm">PRATYUSH</div>
 
         {/* Eyes — centered absolutely so they don't affect flex layout */}
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex items-center z-10">
           <MouseFollowingEyes scrolled={scrolled} />
         </div>
-        <div className="flex gap-6 items-center">
+        <div className="flex-1 flex justify-end gap-6 items-center">
           <div className="hidden md:flex gap-8">
             {/* Active link — accent-violet 5.2:1 ✓ */}
             <a data-cursor="active" className="text-[#8d7dca] font-bold font-label tracking-tighter uppercase text-xs" href="#">Work</a>
