@@ -26,8 +26,6 @@ interface DivGridProps {
   borderColor?: string
   fillColor?: string
   clickedCell?: ClickedCell | null
-  onCellClick?: (row: number, col: number) => void
-  interactive?: boolean
 }
 
 export const BackgroundRippleEffect = ({
@@ -60,6 +58,16 @@ export const BackgroundRippleEffect = ({
         // Design-system tokens (dark-mode only — this site has no light mode)
         "[--cell-border-color:rgba(255,255,255,0.10)] [--cell-fill-color:rgba(255,255,255,0.05)]"
       )}
+      onClick={(e) => {
+        if (!ref.current) return
+        const rect = ref.current.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        const col = Math.floor(x / cellSize)
+        const row = Math.floor(y / cellSize)
+        setClickedCell({ row, col })
+        setRippleKey((k) => k + 1)
+      }}
     >
       {/* overflow-hidden clips the fixed-size grid at viewport edges */}
       <div className="absolute inset-0 overflow-hidden">
@@ -75,11 +83,6 @@ export const BackgroundRippleEffect = ({
           borderColor="var(--cell-border-color)"
           fillColor="var(--cell-fill-color)"
           clickedCell={clickedCell}
-          onCellClick={(row, col) => {
-            setClickedCell({ row, col })
-            setRippleKey((k) => k + 1)
-          }}
-          interactive
         />
       </div>
     </div>
@@ -94,8 +97,6 @@ const DivGrid = ({
   borderColor = "#262626",
   fillColor = "#0d0d0d",
   clickedCell = null,
-  onCellClick = () => {},
-  interactive = true,
 }: DivGridProps) => {
   const cells = useMemo(
     () => Array.from({ length: rows * cols }, (_, idx) => idx),
@@ -129,19 +130,15 @@ const DivGrid = ({
           <div
             key={idx}
             className={cn(
-              "cell relative border-[0.5px] opacity-20 transition-opacity duration-300 ease-out will-change-transform",
+              "cell relative border-[0.5px] opacity-20 transition-opacity duration-300 ease-out will-change-transform pointer-events-none",
               "hover:opacity-40",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
-              !interactive && "pointer-events-none"
             )}
             style={{
               backgroundColor: fillColor,
               borderColor: borderColor,
               ...style,
             }}
-            onClick={
-              interactive ? () => onCellClick(rowIdx, colIdx) : undefined
-            }
           />
         )
       })}
