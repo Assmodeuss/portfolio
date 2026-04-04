@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  cursor: none;
+}
+
 /* ShaderGradientCanvas fills its wrapper via className="absolute inset-0" */
 
 /* ── BackgroundRippleEffect — cell animation ────────────────────────────────
