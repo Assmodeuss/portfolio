@@ -4,45 +4,7 @@ import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
-
-interface Project {
-  title: string
-  description: string
-  year: string
-  link: string
-  image: string
-}
-
-const projects: Project[] = [
-  {
-    title: "Lumina",
-    description: "AI-powered design system generator.",
-    year: "2024",
-    link: "#",
-    image: "https://plus.unsplash.com/premium_photo-1723489242223-865b4a8cf7b8?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0",
-  },
-  {
-    title: "Flux",
-    description: "Real-time collaboration for creative teams.",
-    year: "2024",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1530435460869-d13625c69bbf?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0",
-  },
-  {
-    title: "Prism",
-    description: "Color palette extraction from any image.",
-    year: "2023",
-    link: "#",
-    image: "https://i.pinimg.com/1200x/99/ca/5c/99ca5cf82cf12df8801f7b2bef38d325.jpg",
-  },
-  {
-    title: "Vertex",
-    description: "3D modeling toolkit for the web.",
-    year: "2023",
-    link: "#",
-    image: "https://i.pinimg.com/736x/7c/15/39/7c1539cf7ff0207cb49ce0d338de1e5f.jpg",
-  },
-]
+import { projects } from "@/data/projects"
 
 export function ProjectShowcase() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -112,8 +74,8 @@ export function ProjectShowcase() {
         <div className="relative w-[280px] h-[180px] bg-muted rounded-2xl overflow-hidden">
           {projects.map((project, index) => (
             <img
-              key={project.title}
-              src={project.image || "/placeholder.svg"}
+              key={project.slug}
+              src={project.heroImage || "/placeholder.svg"}
               alt={project.title}
               className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
               style={{
@@ -131,8 +93,8 @@ export function ProjectShowcase() {
       <div className="space-y-0">
         {projects.map((project, index) => (
           <a
-            key={project.title}
-            href={project.link}
+            key={project.slug}
+            href={`/projects/${project.slug}`}
             className="group block"
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
