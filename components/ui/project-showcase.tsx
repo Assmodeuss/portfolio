@@ -99,7 +99,7 @@ export function ProjectShowcase() {
       <h2 className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-8">Selected Work</h2>
 
       <div
-        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-lg"
+        className="pointer-events-none fixed z-50 overflow-hidden rounded-2xl shadow-lg"
         style={{
           left: containerRef.current?.getBoundingClientRect().left ?? 0,
           top: containerRef.current?.getBoundingClientRect().top ?? 0,
@@ -109,7 +109,7 @@ export function ProjectShowcase() {
           transition: "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), scale 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <div className="relative w-[280px] h-[180px] bg-muted rounded-xl overflow-hidden">
+        <div className="relative w-[280px] h-[180px] bg-muted rounded-2xl overflow-hidden">
           {projects.map((project, index) => (
             <img
               key={project.title}
