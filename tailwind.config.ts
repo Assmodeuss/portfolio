@@ -82,6 +82,7 @@ const config: Config = {
         body: ['Plus Jakarta Sans', 'sans-serif'],
         label: ['Space Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        serif: ['"Bodoni Moda Variable"', '"Bodoni Moda"', 'Georgia', 'serif'],
       },
     },
   },
