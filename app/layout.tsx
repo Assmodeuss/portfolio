@@ -19,12 +19,8 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600&family=Space+Grotesk:wght@300;500&display=swap"
-        />
       </head>
-      <body className="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary no-scrollbar antialiased">
+      <body className="bg-background text-foreground font-body selection:bg-primary/30 selection:text-primary no-scrollbar antialiased">
         <Cursor />
         {children}
       </body>

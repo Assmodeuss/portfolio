@@ -2,6 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Self-hosted fonts ──────────────────────────────────────────────────────
+   Drop font files into /public/fonts/ matching the filenames below.
+   Only weights 400 and 500 are loaded for display/body; 400 only for mono/serif.
+   Subset: Latin. Format: woff2 only (all modern browsers).
+*/
+
+/* PP Neue Montreal — display font */
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('/fonts/PPNeueMontreal-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('/fonts/PPNeueMontreal-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Switzer — body font */
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* JetBrains Mono — mono / metadata font */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Newsreader — serif, case-study pull quotes only */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/Newsreader-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 body {
   cursor: none;
 }
@@ -29,6 +85,32 @@ body {
     -webkit-mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 20%, transparent 100%);
             mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 20%, transparent 100%);
   }
+
+  /* Typography utilities — visual-system-guide §7.2 */
+  .text-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+
+  .text-mono-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  /* Layout utilities — visual-system-guide §7.2 */
+  .content-width {
+    max-width: 720px;
+    margin-left: 6vw;
+  }
+
+  .content-wide {
+    max-width: 960px;
+    margin-inline: auto;
+  }
 }
 
 /* Material Symbols icon font */
@@ -42,6 +124,14 @@ body {
   --ring:              #525252;   /* focus / ghost    3.7:1 large  */
   --border:            #262626;   /* dividers                     */
   --accent-violet:     #8d7dca;   /* accent (5 places) 5.2:1 ✓ AA */
+
+  /* Typography — visual-system-guide §2.1 */
+  --font-display: 'PP Neue Montreal', 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Switzer', 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular,
+                  Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-serif:   'Newsreader', 'Source Serif 4', ui-serif, Georgia, Cambria,
+                  'Times New Roman', Times, serif;
 }
 
 .material-symbols-outlined {
