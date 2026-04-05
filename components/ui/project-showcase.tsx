@@ -141,8 +141,8 @@ export function ProjectShowcase() {
               {/* Background highlight on hover */}
               <div
                 className={`
-                  absolute inset-0 -mx-4 px-4 bg-accent/40 rounded-lg
-                  transition-all duration-300 ease-out
+                  absolute inset-0 -mx-4 px-4 bg-accent/20 rounded-2xl backdrop-blur-sm
+                  transition-all duration-500 ease-out
                   ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}
                 `}
               />
