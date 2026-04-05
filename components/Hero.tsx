@@ -5,12 +5,15 @@ import { useRef, useEffect } from 'react'
 export default function Hero() {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const mouseXRef = useRef(0)
+  const mouseYRef = useRef(0)
   const currentWeightRef = useRef(200)
+  const currentItalRef = useRef(0)
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseXRef.current = e.clientX
+      mouseYRef.current = e.clientY
     }
 
     window.addEventListener('mousemove', handleMouseMove)
@@ -20,8 +23,11 @@ export default function Hero() {
       const clamped = Math.min(900, Math.max(200, target))
       currentWeightRef.current += (clamped - currentWeightRef.current) * 0.1
 
+      const targetItal = Math.max(0, Math.min(1, mouseYRef.current / window.innerHeight)) * 0.8
+      currentItalRef.current += (targetItal - currentItalRef.current) * 0.08
+
       if (headingRef.current) {
-        headingRef.current.style.fontVariationSettings = `"wght" ${currentWeightRef.current.toFixed(2)}`
+        headingRef.current.style.fontVariationSettings = `"wght" ${currentWeightRef.current.toFixed(2)}, "ital" ${currentItalRef.current.toFixed(4)}, "slnt" ${(-currentItalRef.current * 10).toFixed(4)}`
       }
 
       rafRef.current = requestAnimationFrame(animate)
