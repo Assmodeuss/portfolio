@@ -54,7 +54,7 @@ export function PageLoader() {
     <div
       aria-hidden="true"
       style={{ transition: 'opacity 0.4s ease' }}
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-background ${
+      className={`fixed inset-0 z-[9999] bg-background ${
         state === 'fading' ? 'opacity-0' : 'opacity-100'
       }`}
     >

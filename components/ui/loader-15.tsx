@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Loader = () => {
   return (
     <StyledWrapper>
-      <div>
+      <div className="inner">
         <svg className="gegga">
           <defs>
             <filter id="gegga">
@@ -37,6 +37,19 @@ const Loader = () => {
 }
 
 const StyledWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  .inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .gegga {
     width: 0;
   }
@@ -46,11 +59,11 @@ const StyledWrapper = styled.div`
   }
 
   .stopp1 {
-    stop-color: #f700a8;
+    stop-color: #8d7dca;
   }
 
   .stopp2 {
-    stop-color: #ff8000;
+    stop-color: #606080;
   }
 
   .halvan {
