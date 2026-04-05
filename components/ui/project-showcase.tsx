@@ -57,7 +57,7 @@ export function ProjectShowcase() {
       curX.current += (mouseX.current - curX.current) * 0.1;
       curY.current += (mouseY.current - curY.current) * 0.1;
       if (previewRef.current) {
-        const offsetX = 80;
+        const offsetX = 100;
         const offsetY = -40;
         previewRef.current.style.transform = `translate(${curX.current + offsetX}px, ${curY.current + offsetY}px) translate(-50%, -50%)`;
       }
