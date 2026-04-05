@@ -57,7 +57,9 @@ export function ProjectShowcase() {
       curX.current += (mouseX.current - curX.current) * 0.1;
       curY.current += (mouseY.current - curY.current) * 0.1;
       if (previewRef.current) {
-        previewRef.current.style.transform = `translate(${curX.current}px, ${curY.current}px) translate(-50%, -50%)`;
+        const offsetX = 24;
+        const offsetY = -120;
+        previewRef.current.style.transform = `translate(${curX.current + offsetX}px, ${curY.current + offsetY}px) translate(-50%, -50%)`;
       }
       rafRef.current = requestAnimationFrame(loop);
     };
