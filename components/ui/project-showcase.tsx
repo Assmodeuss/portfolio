@@ -99,7 +99,7 @@ export function ProjectShowcase() {
       <h2 className="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-8">Selected Work</h2>
 
       <div
-        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl"
+        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-lg"
         style={{
           left: containerRef.current?.getBoundingClientRect().left ?? 0,
           top: containerRef.current?.getBoundingClientRect().top ?? 0,
@@ -109,7 +109,7 @@ export function ProjectShowcase() {
           transition: "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), scale 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <div className="relative w-[280px] h-[180px] bg-secondary rounded-xl overflow-hidden">
+        <div className="relative w-[280px] h-[180px] bg-muted rounded-xl overflow-hidden">
           {projects.map((project, index) => (
             <img
               key={project.title}
@@ -124,7 +124,7 @@ export function ProjectShowcase() {
             />
           ))}
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
         </div>
       </div>
 
@@ -137,11 +137,11 @@ export function ProjectShowcase() {
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="relative py-5 border-t border-border transition-all duration-300 ease-out">
+            <div className="relative py-5 border-t border-border/60 transition-all duration-300 ease-out">
               {/* Background highlight on hover */}
               <div
                 className={`
-                  absolute inset-0 -mx-4 px-4 bg-secondary/50 rounded-lg
+                  absolute inset-0 -mx-4 px-4 bg-accent/40 rounded-lg
                   transition-all duration-300 ease-out
                   ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}
                 `}
@@ -184,7 +184,7 @@ export function ProjectShowcase() {
                     className={`
                       text-muted-foreground text-sm mt-1 leading-relaxed
                       transition-all duration-300 ease-out
-                      ${hoveredIndex === index ? "text-foreground/70" : "text-muted-foreground"}
+                      ${hoveredIndex === index ? "text-foreground/60" : "text-muted-foreground"}
                     `}
                   >
                     {project.description}
@@ -207,7 +207,7 @@ export function ProjectShowcase() {
         ))}
 
         {/* Bottom border for last item */}
-        <div className="border-t border-border" />
+        <div className="border-t border-border/60" />
       </div>
     </section>
   )
