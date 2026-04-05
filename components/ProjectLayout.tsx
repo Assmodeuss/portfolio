@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar"
 import BackgroundSystem from "@/components/BackgroundSystem"
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect"
 import type { ProjectData, ContentSection } from "@/data/projects"
-import Link from "next/link"
+import LinkWithLoader from "@/components/LinkWithLoader"
 
 function renderSection(section: ContentSection, index: number) {
   switch (section.type) {
@@ -204,10 +204,10 @@ export default function ProjectLayout({ project }: { project: ProjectData }) {
       {/* Mobile bottom nav */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-background/90 backdrop-blur-xl z-[100] border-t border-[#262626]">
         <div className="flex justify-around items-center h-full max-w-[720px] mx-auto">
-          <Link className="flex flex-col items-center gap-1 text-muted-foreground" href="/">
+          <LinkWithLoader className="flex flex-col items-center gap-1 text-muted-foreground" href="/">
             <span className="material-symbols-outlined text-[20px]">home</span>
             <span className="font-mono text-[8px] uppercase tracking-tighter">Work</span>
-          </Link>
+          </LinkWithLoader>
           <a className="flex flex-col items-center gap-1 text-muted-foreground" href="#">
             <span className="material-symbols-outlined text-[20px]">person</span>
             <span className="font-mono text-[8px] uppercase tracking-tighter">About</span>

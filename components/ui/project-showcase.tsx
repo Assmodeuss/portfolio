@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
 import { projects } from "@/data/projects"
+import LinkWithLoader from "@/components/LinkWithLoader"
 
 export function ProjectShowcase() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -92,7 +93,7 @@ export function ProjectShowcase() {
 
       <div className="space-y-0">
         {projects.map((project, index) => (
-          <a
+          <LinkWithLoader
             key={project.slug}
             href={`/projects/${project.slug}`}
             className="group block"
@@ -165,7 +166,7 @@ export function ProjectShowcase() {
                 </span>
               </div>
             </div>
-          </a>
+          </LinkWithLoader>
         ))}
 
         {/* Bottom border for last item */}

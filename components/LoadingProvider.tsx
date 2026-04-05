@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { Component as Loader3 } from "@/components/ui/loader-3"
+import { LoaderContext } from "@/context/loader-context"
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
@@ -19,26 +20,6 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Show loader when an internal link is clicked (before navigation starts)
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      const anchor = (e.target as HTMLElement).closest("a")
-      if (!anchor) return
-      const href = anchor.getAttribute("href")
-      if (
-        !href ||
-        href.startsWith("#") ||
-        href.startsWith("mailto:") ||
-        href.startsWith("http") ||
-        href.startsWith("//") ||
-        anchor.target === "_blank"
-      ) return
-      setLoading(true)
-    }
-    document.addEventListener("click", handleClick)
-    return () => document.removeEventListener("click", handleClick)
-  }, [])
-
   // Hide loader once the new route has finished rendering
   useEffect(() => {
     if (isMounted.current) {
@@ -49,7 +30,7 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   }, [pathname])
 
   return (
-    <>
+    <LoaderContext.Provider value={{ loading, setLoading }}>
       <div
         aria-hidden="true"
         style={
@@ -64,7 +45,6 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
             opacity: loading ? 1 : 0,
             pointerEvents: loading ? "auto" : "none",
             transition: "opacity 0.45s ease",
-            // Always show white boxes regardless of colour-scheme
             "--clr": "#ffffff",
           } as React.CSSProperties
         }
@@ -72,6 +52,6 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
         <Loader3 />
       </div>
       {children}
-    </>
+    </LoaderContext.Provider>
   )
 }
