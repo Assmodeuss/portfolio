@@ -1,12 +1,11 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
-interface Loader3Props {
-  className?: string
-}
+export const Component = () => {
+  const [count, setCount] = useState(0);
 
-export const Loader3 = ({ className }: Loader3Props) => {
   return (
-    <div className={cn("loader", className)}>
+    <div className="loader">
       <div className="box box0">
         <div></div>
       </div>
@@ -35,5 +34,5 @@ export const Loader3 = ({ className }: Loader3Props) => {
         <div></div>
       </div>
     </div>
-  )
-}
+  );
+};

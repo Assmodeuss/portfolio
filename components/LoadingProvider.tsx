@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
-import { Loader3 } from "@/components/ui/loader-3"
+import { Component as Loader3 } from "@/components/ui/loader-3"
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
