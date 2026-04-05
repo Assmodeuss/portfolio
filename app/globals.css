@@ -42,6 +42,9 @@ body {
   --ring:              #525252;   /* focus / ghost    3.7:1 large  */
   --border:            #262626;   /* dividers                     */
   --accent-violet:     #8d7dca;   /* accent (5 places) 5.2:1 ✓ AA */
+
+  /* HSL channel tokens — for hsl(var(--x) / alpha) usage in loader + effects */
+  --primary: 253 100% 87%;        /* #ccbeff in HSL channels      */
 }
 
 .material-symbols-outlined {
