@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Cursor } from '@/components/ui/inverted-cursor'
+import { PageLoader } from '@/components/ui/page-loader'
 
 export const metadata: Metadata = {
   title: 'Pratyush — Design · Systems · Craft',
@@ -29,6 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary no-scrollbar antialiased">
+        <PageLoader />
         <Cursor />
         {children}
       </body>
