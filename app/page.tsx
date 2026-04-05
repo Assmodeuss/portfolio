@@ -1,6 +1,7 @@
 import BackgroundSystem from '@/components/BackgroundSystem'
 import { BackgroundRippleEffect } from '@/components/ui/background-ripple-effect'
 import Navbar from '@/components/Navbar'
+import Hero from '@/components/Hero'
 
 // ── Colour contrast audit (visual-system-guide §8 / WCAG AA) ──────────────
 // All text tokens verified against bg #0a0a0a:
@@ -56,25 +57,12 @@ export default function Home() {
         <button data-cursor="active" className="mt-auto py-4 border border-[#262626] text-[#8d7dca] font-mono text-[10px] tracking-widest uppercase hover:bg-[#1a1a1a] transition-colors">Copy Email</button>
       </aside>
 
-      <main className="relative z-[10] max-w-[720px] mx-auto px-6 pt-32 pb-24">
-        {/* Hero */}
-        <section className="min-h-[819px] flex flex-col justify-center mb-32 relative items-center">
-          <div className="overflow-hidden mb-4 w-full flex justify-center">
-            {/* 19.4:1 ✓ */}
-            <h1 data-cursor="active" className="text-[clamp(3.5rem,10vw,6rem)] font-headline font-bold tracking-tighter leading-[0.9] text-foreground text-center">
-              PRATYUSH
-            </h1>
-          </div>
-          <div className="flex items-center gap-4 mb-16 mx-auto">
-            {/* 5.2:1 ✓ — accent-violet, one of 5 permitted uses */}
-            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-[#8d7dca]">design · systems · craft</span>
-          </div>
-          <div className="mt-12 flex flex-col items-center animate-pulse-soft mx-auto">
-            {/* 3.7:1 — large-text threshold, decorative scroll indicator only */}
-            <span className="font-mono text-[0.6rem] tracking-[0.3em] uppercase text-ring mb-2">Scroll</span>
-            <span className="material-symbols-outlined text-[#8d7dca] text-sm">expand_more</span>
-          </div>
-        </section>
+      {/* Hero — full-viewport, outside constrained main */}
+      <div className="relative z-[10]">
+        <Hero />
+      </div>
+
+      <main className="relative z-[10] max-w-[720px] mx-auto px-6 pb-24">
 
         {/* Selected Work */}
         <section className="mb-48">
