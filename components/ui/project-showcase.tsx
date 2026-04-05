@@ -57,8 +57,8 @@ export function ProjectShowcase() {
       curX.current += (mouseX.current - curX.current) * 0.1;
       curY.current += (mouseY.current - curY.current) * 0.1;
       if (previewRef.current) {
-        const offsetX = 24;
-        const offsetY = -120;
+        const offsetX = 80;
+        const offsetY = -40;
         previewRef.current.style.transform = `translate(${curX.current + offsetX}px, ${curY.current + offsetY}px) translate(-50%, -50%)`;
       }
       rafRef.current = requestAnimationFrame(loop);
