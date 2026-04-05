@@ -40,46 +40,53 @@ const projects = [
 
 export function ProjectShowcase() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const mouseX = useRef(0);
   const mouseY = useRef(0);
   const curX = useRef(0);
   const curY = useRef(0);
+  const containerRect = useRef<DOMRect | null>(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     const onMove = (e: MouseEvent) => {
-      mouseX.current = e.clientX;
-      mouseY.current = e.clientY;
+      const rect = section.getBoundingClientRect();
+      containerRect.current = rect;
+      mouseX.current = e.clientX - rect.left;
+      mouseY.current = e.clientY - rect.top;
     };
 
     const loop = () => {
       curX.current += (mouseX.current - curX.current) * 0.1;
       curY.current += (mouseY.current - curY.current) * 0.1;
-      if (previewRef.current) {
-        const offsetX = 150;
-        const offsetY = -40;
-        previewRef.current.style.transform = `translate(${curX.current + offsetX}px, ${curY.current + offsetY}px) translate(-50%, -50%)`;
+      if (previewRef.current && containerRect.current) {
+        previewRef.current.style.left = `${containerRect.current.left}px`;
+        previewRef.current.style.top = `${containerRect.current.top}px`;
+        previewRef.current.style.transform = `translate3d(${curX.current + 24}px, ${curY.current - 100}px, 0)`;
       }
       rafRef.current = requestAnimationFrame(loop);
     };
 
-    window.addEventListener("mousemove", onMove);
+    section.addEventListener("mousemove", onMove);
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
-      window.removeEventListener("mousemove", onMove);
+      section.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
   return (
-    <div className="w-full">
-      {/* Floating preview — fixed, lerp-smoothed cursor follower */}
+    <section ref={sectionRef} className="relative w-full max-w-2xl mx-auto px-6 py-16">
+      {/* Floating preview — anchored to container, lerp-smoothed local coords */}
       <div
         ref={previewRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 pointer-events-none z-40 w-[280px] h-[180px] border border-[#262626] overflow-hidden shadow-2xl"
+        className="fixed pointer-events-none z-40 w-[280px] h-[180px] border border-[#262626] overflow-hidden shadow-2xl"
         style={{
           opacity: hoverIndex !== null ? 1 : 0,
           transition: "opacity 0.5s ease-out",
@@ -133,6 +140,6 @@ export function ProjectShowcase() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
