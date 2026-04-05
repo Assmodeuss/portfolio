@@ -1,4 +1,6 @@
 import Navbar from "@/components/Navbar"
+import BackgroundSystem from "@/components/BackgroundSystem"
+import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect"
 import type { ProjectData, ContentSection } from "@/data/projects"
 import Link from "next/link"
 
@@ -55,18 +57,10 @@ function renderSection(section: ContentSection, index: number) {
 export default function ProjectLayout({ project }: { project: ProjectData }) {
   return (
     <>
-      {/* Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[#131313]" />
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            background:
-              "radial-gradient(at 0% 0%, #606080 0px, transparent 50%), radial-gradient(at 100% 0%, #8d7dca 0px, transparent 50%), radial-gradient(at 50% 100%, #212121 0px, transparent 50%)",
-            filter: "blur(80px)",
-            transform: "scale(1.2)",
-          }}
-        />
+      <BackgroundSystem />
+
+      <div className="fixed inset-0 z-0">
+        <BackgroundRippleEffect />
       </div>
 
       {/* Grain overlay */}
