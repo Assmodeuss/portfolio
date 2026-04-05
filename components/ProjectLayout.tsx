@@ -153,7 +153,7 @@ export default function ProjectLayout({ project }: { project: ProjectData }) {
               <p className="font-mono text-[0.6875rem] tracking-[0.05em] text-on-surface/30 mb-6 uppercase">
                 Next Project
               </p>
-              <Link className="group block" href={`/projects/${project.nextProject.slug}`}>
+              <LinkWithLoader className="group block" href={`/projects/${project.nextProject.slug}`}>
                 <h2
                   className="font-headline font-bold text-on-surface/40 group-hover:text-primary transition-colors duration-500"
                   style={{
@@ -170,7 +170,7 @@ export default function ProjectLayout({ project }: { project: ProjectData }) {
                     View Case Study
                   </span>
                 </div>
-              </Link>
+              </LinkWithLoader>
             </div>
           </section>
         )}
