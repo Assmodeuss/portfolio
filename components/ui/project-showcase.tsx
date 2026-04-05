@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
@@ -40,70 +40,27 @@ const projects = [
 
 export function ProjectShowcase() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>(0);
-  const mouseX = useRef(0);
-  const mouseY = useRef(0);
-  const curX = useRef(0);
-  const curY = useRef(0);
-  const containerRect = useRef<DOMRect | null>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const onMove = (e: MouseEvent) => {
-      const rect = section.getBoundingClientRect();
-      containerRect.current = rect;
-      mouseX.current = e.clientX - rect.left;
-      mouseY.current = e.clientY - rect.top;
-    };
-
-    const loop = () => {
-      curX.current += (mouseX.current - curX.current) * 0.1;
-      curY.current += (mouseY.current - curY.current) * 0.1;
-      if (previewRef.current && containerRect.current) {
-        previewRef.current.style.left = `${containerRect.current.left}px`;
-        previewRef.current.style.top = `${containerRect.current.top}px`;
-        previewRef.current.style.transform = `translate3d(${curX.current + 24}px, ${curY.current - 100}px, 0)`;
-      }
-      rafRef.current = requestAnimationFrame(loop);
-    };
-
-    section.addEventListener("mousemove", onMove);
-    rafRef.current = requestAnimationFrame(loop);
-
-    return () => {
-      section.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full max-w-2xl mx-auto px-6 py-16">
-      {/* Floating preview — anchored to container, lerp-smoothed local coords */}
-      <div
-        ref={previewRef}
-        aria-hidden="true"
-        className="fixed pointer-events-none z-40 w-[280px] h-[180px] border border-[#262626] overflow-hidden shadow-2xl"
-        style={{
-          opacity: hoverIndex !== null ? 1 : 0,
-          transition: "opacity 0.5s ease-out",
-        }}
-      >
-        {projects.map((project, i) => (
-          <img
-            key={project.title}
-            src={project.image}
-            alt={project.alt}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              opacity: hoverIndex === i ? 1 : 0,
-              transition: "opacity 0.5s ease-out",
-            }}
-          />
-        ))}
+    <section className="relative w-full max-w-2xl mx-auto px-6 py-16">
+      {/* Static preview area */}
+      <div className="relative w-full h-[260px] mb-10 flex items-center justify-center">
+        <div className="relative w-[420px] h-[260px] rounded-2xl overflow-hidden">
+          {projects.map((project, i) => (
+            <img
+              key={project.title}
+              src={project.image}
+              alt={project.alt}
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
+              style={{
+                opacity: hoverIndex === i ? 1 : 0,
+                scale: hoverIndex === i ? "1" : "1.05",
+                filter: hoverIndex === i ? "none" : "blur(10px)",
+              }}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
+        </div>
       </div>
 
       {/* Project list */}
