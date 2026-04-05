@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar"
 import BackgroundSystem from "@/components/BackgroundSystem"
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect"
 import type { ProjectData, ContentSection } from "@/data/projects"
-import Link from "next/link"
+import LinkWithLoader from "@/components/ui/LinkWithLoader"
 
 function renderSection(section: ContentSection, index: number) {
   switch (section.type) {
@@ -153,7 +153,7 @@ export default function ProjectLayout({ project }: { project: ProjectData }) {
               <p className="font-mono text-[0.6875rem] tracking-[0.05em] text-on-surface/30 mb-6 uppercase">
                 Next Project
               </p>
-              <Link className="group block" href={`/projects/${project.nextProject.slug}`}>
+              <LinkWithLoader className="group block" href={`/projects/${project.nextProject.slug}`}>
                 <h2
                   className="font-headline font-bold text-on-surface/40 group-hover:text-primary transition-colors duration-500"
                   style={{
@@ -170,7 +170,7 @@ export default function ProjectLayout({ project }: { project: ProjectData }) {
                     View Case Study
                   </span>
                 </div>
-              </Link>
+              </LinkWithLoader>
             </div>
           </section>
         )}
@@ -204,10 +204,10 @@ export default function ProjectLayout({ project }: { project: ProjectData }) {
       {/* Mobile bottom nav */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-background/90 backdrop-blur-xl z-[100] border-t border-[#262626]">
         <div className="flex justify-around items-center h-full max-w-[720px] mx-auto">
-          <Link className="flex flex-col items-center gap-1 text-muted-foreground" href="/">
+          <LinkWithLoader className="flex flex-col items-center gap-1 text-muted-foreground" href="/">
             <span className="material-symbols-outlined text-[20px]">home</span>
             <span className="font-mono text-[8px] uppercase tracking-tighter">Work</span>
-          </Link>
+          </LinkWithLoader>
           <a className="flex flex-col items-center gap-1 text-muted-foreground" href="#">
             <span className="material-symbols-outlined text-[20px]">person</span>
             <span className="font-mono text-[8px] uppercase tracking-tighter">About</span>

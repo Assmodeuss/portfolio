@@ -1,0 +1,26 @@
+"use client"
+
+import { createContext, useContext, useState } from "react"
+
+type LoaderContextType = {
+  loading: boolean
+  setLoading: (loading: boolean) => void
+}
+
+const LoaderContext = createContext<LoaderContextType | null>(null)
+
+export const LoaderProvider = ({ children }: { children: React.ReactNode }) => {
+  const [loading, setLoading] = useState(false)
+
+  return (
+    <LoaderContext.Provider value={{ loading, setLoading }}>
+      {children}
+    </LoaderContext.Provider>
+  )
+}
+
+export const useLoader = () => {
+  const ctx = useContext(LoaderContext)
+  if (!ctx) throw new Error("useLoader must be used inside LoaderProvider")
+  return ctx
+}
