@@ -18,6 +18,7 @@ const config: Config = {
         'background':       '#0a0a0a',   // was #131313 — spec requires #0a0a0a
         'foreground':       '#fafafa',
         'muted-foreground': '#a1a1a1',
+        'border':           '#262626',
         'accent-violet':    '#8d7dca',
         // ── Original Material Design palette (kept for backward compat) ──
         'background-legacy': '#131313',
